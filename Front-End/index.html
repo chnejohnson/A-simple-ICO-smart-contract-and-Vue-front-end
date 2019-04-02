@@ -57,22 +57,26 @@
               <div id="events">
                 <div class="card" v-for="(event,key) in events" :key="key">
                   <div class="card-content">
-                    <p>{{ event.blockNumber }}</p>
+                    <p>Block Number {{ event.blockNumber }}</p>
+                    <span class="title is-6">Event:</span>
+                    <span class="subtitle is-6">{{ event.event }}</span>
                     <p>
-                      <span class="has-text-weight-bold">Event:</span>
-                      <span>{{ event.event }}</span>
+                      <span class="title is-6">From:</span>
+                      <span class="subtitle is-6">{{
+                        event.returnValues.from
+                      }}</span>
                     </p>
                     <p>
-                      <span class="has-text-weight-bold">From:</span
-                      >{{ event.returnValues.from }}
+                      <span class="title is-6">To:</span>
+                      <span class="subtitle is-6">{{
+                        event.returnValues.to
+                      }}</span>
                     </p>
                     <p>
-                      <span class="has-text-weight-bold">To:</span
-                      >{{ event.returnValues.to }}
-                    </p>
-                    <p>
-                      <span class="has-text-weight-bold">Value:</span
-                      >{{ event.returnValues.value }}
+                      <span class="title is-6">Value:</span>
+                      <span class="subtitle is-6">{{
+                        event.returnValues.value
+                      }}</span>
                     </p>
                   </div>
                 </div>
@@ -93,7 +97,6 @@
               class="input"
               v-model="userAccount"
               type="text"
-              style="width:300px"
               placeholder="input your address"
             />
           </div>
@@ -105,7 +108,6 @@
               class="input"
               v-model="value"
               type="number"
-              style="width:300px;"
               placeholder="how much ether you want to buy?"
             />
           </div>
@@ -120,14 +122,12 @@
               class="input"
               v-model="toAddress"
               type="text"
-              style="width:300px"
               placeholder="who you want to transfer to?"
             />
             <input
               class="input"
               v-model="transferValue"
               type="number"
-              style="width:300px"
               placeholder="how much TPT?"
             />
           </div>
@@ -138,7 +138,7 @@
             <p class="title is-5 has-text-centered">All address of nodes</p>
             <ul>
               <li v-for="node in nodes" :key="node">
-                <span>{{ node }}</span>
+                <span class="subtitle is-6">{{ node }}</span>
               </li>
             </ul>
           </div>

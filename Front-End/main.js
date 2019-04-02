@@ -373,6 +373,7 @@ const vm = new Vue({
 
     this.nodes = await web3.eth.getAccounts();
     this.getTransfer();
+    console.log(typeof this.ownerAddress);
   },
   methods: {
     startICO() {
@@ -460,7 +461,7 @@ const vm = new Vue({
           fromBlock: 0,
           toBlack: "latest"
         });
-        console.log(res);
+        console.log(typeof res[0].returnValues.to);
         this.events = res;
       } catch (err) {
         console.log("getPastEvents", err);
