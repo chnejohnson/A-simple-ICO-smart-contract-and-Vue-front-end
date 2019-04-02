@@ -349,7 +349,9 @@ const vm = new Vue({
     fund: 0,
     //Transfer
     transferValue: null,
-    toAddress: null
+    toAddress: null,
+    //Events
+    events: null
   },
   computed: {
     stage() {
@@ -447,6 +449,19 @@ const vm = new Vue({
         .on("error", err => {
           console.log(err);
         });
+    },
+    //Event
+    async getPastEvents() {
+      try {
+        let res = await this.tokenContract.getPastEvents("Transfer", {
+          fromBlock: 0,
+          toBlack: "latest"
+        });
+        console.log(res);
+        this.events = res;
+      } catch (err) {
+        console.log("getPastEvents", err);
+      }
     }
   }
 });

@@ -46,6 +46,37 @@
                 Get Current Fund
               </button>
             </div>
+            <!-- Past Event -->
+            <div class="mybox">
+              <p class="title is-4">
+                Past Events
+                <button @click="getPastEvents" class="button">
+                  Get
+                </button>
+              </p>
+
+              <br />
+              <div class="card" v-for="(event,key) in events" :key="key">
+                <div class="card-content">
+                  <p>
+                    <span class="has-text-weight-bold">Event:</span>
+                    {{ event.event }}
+                  </p>
+                  <p>
+                    <span class="has-text-weight-bold">From:</span
+                    >{{ event.returnValues.from }}
+                  </p>
+                  <p>
+                    <span class="has-text-weight-bold">To:</span
+                    >{{ event.returnValues.to }}
+                  </p>
+                  <p>
+                    <span class="has-text-weight-bold">Value:</span
+                    >{{ event.returnValues.value }}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
