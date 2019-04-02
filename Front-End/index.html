@@ -54,26 +54,27 @@
                   Get
                 </button>
               </p>
-
-              <br />
-              <div class="card" v-for="(event,key) in events" :key="key">
-                <div class="card-content">
-                  <p>
-                    <span class="has-text-weight-bold">Event:</span>
-                    {{ event.event }}
-                  </p>
-                  <p>
-                    <span class="has-text-weight-bold">From:</span
-                    >{{ event.returnValues.from }}
-                  </p>
-                  <p>
-                    <span class="has-text-weight-bold">To:</span
-                    >{{ event.returnValues.to }}
-                  </p>
-                  <p>
-                    <span class="has-text-weight-bold">Value:</span
-                    >{{ event.returnValues.value }}
-                  </p>
+              <div id="events">
+                <div class="card" v-for="(event,key) in events" :key="key">
+                  <div class="card-content">
+                    <p>{{ event.blockNumber }}</p>
+                    <p>
+                      <span class="has-text-weight-bold">Event:</span>
+                      <span>{{ event.event }}</span>
+                    </p>
+                    <p>
+                      <span class="has-text-weight-bold">From:</span
+                      >{{ event.returnValues.from }}
+                    </p>
+                    <p>
+                      <span class="has-text-weight-bold">To:</span
+                      >{{ event.returnValues.to }}
+                    </p>
+                    <p>
+                      <span class="has-text-weight-bold">Value:</span
+                      >{{ event.returnValues.value }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -133,12 +134,19 @@
           <button @click="transferTo" class="button">Transfer</button>
 
           <!-- All Address of Nodes -->
-          <div class="mybox">
+          <div class="mybox content">
             <p class="title is-5 has-text-centered">All address of nodes</p>
             <ul>
-              <li v-for="node in nodes" :key="node">{{ node }}</li>
+              <li v-for="node in nodes" :key="node">
+                <span>{{ node }}</span>
+              </li>
             </ul>
           </div>
+        </div>
+
+        <!-- User Interface -->
+        <div class="column">
+          <button @click="getTransfer" class="button">Get Transfer</button>
         </div>
       </div>
     </div>

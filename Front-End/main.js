@@ -372,6 +372,7 @@ const vm = new Vue({
     this.getStage();
 
     this.nodes = await web3.eth.getAccounts();
+    this.getTransfer();
   },
   methods: {
     startICO() {
@@ -449,8 +450,10 @@ const vm = new Vue({
         .on("error", err => {
           console.log(err);
         });
+
+      this.getTransfer();
     },
-    //Event
+    //Get events
     async getPastEvents() {
       try {
         let res = await this.tokenContract.getPastEvents("Transfer", {
@@ -462,6 +465,16 @@ const vm = new Vue({
       } catch (err) {
         console.log("getPastEvents", err);
       }
+    },
+    //Subscribe (can't work)
+    getTransfer() {
+      this.tokenContract.events
+        .Transfer()
+        .on("data", event => {
+          let data = event.returnValue;
+          console.log("hi", data);
+        })
+        .on("error", console.error);
     }
   }
 });
