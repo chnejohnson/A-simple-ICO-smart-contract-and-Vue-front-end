@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bulma -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <title>ICO</title>
+  </head>
+  <body class="has-background-grey-lighter">
+    <div id="app">
+      <p class="title is-2 has-text-centered">ICO Ecosystem</p>
+
+      <div class="columns">
+        <div class="column">
+          <!-- Info -->
+          <div>
+            <p class="title is-5">Token Contract Address:</p>
+            <p class="subtitle is-6">{{ address }}</p>
+            <p class="title is-5">Name:</p>
+            <p class="subtitle is-6">{{ name }}</p>
+            <p class="title is-5">Symbel:</p>
+            <p class="subtitle is-6">{{ symbel }}</p>
+            <br />
+            <p class="title is-5">Stage:</p>
+            <p class="subtitle is-6">{{ stage }}</p>
+          </div>
+
+          <!-- Owner -->
+          <div class="owner">
+            <p class="title is-3">Owner</p>
+            <p class="subtitle is-5">
+              owner address:
+              <span class="has-text-link">{{ ownerAddress }}</span>
+            </p>
+            <button class="button" @click="startICO">Start ICO</button>
+            <button class="button" @click="endICO">End ICO</button>
+            <div class="mybox">
+              <p class="is-size-4">Current Fund: {{ fund }} {{ symbel }}</p>
+              <button @click="getFund" class="button">
+                Get Current Fund
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- User -->
+        <div class="column">
+          <div class="title is-3">User</div>
+          <p class="subtitle is-5">
+            Token balance: {{ userBalance }} {{ symbel }}
+          </p>
+          <div class="mybox">
+            <p class="subtitle is-5">Address (msg.sender)</p>
+            <input
+              class="input"
+              v-model="userAccount"
+              type="text"
+              style="width:300px"
+              placeholder="input your address"
+            />
+          </div>
+
+          <!-- Fallback -->
+          <div class="mybox">
+            <p class="subtitle is-5">Value</p>
+            <input
+              class="input"
+              v-model="value"
+              type="number"
+              style="width:300px;"
+              placeholder="how much ether you want to buy?"
+            />
+          </div>
+
+          <button @click="balanceOf" class="button">Look up</button>
+          <button @click="fallback" class="button">Buy</button>
+
+          <!-- Transfer -->
+          <div class="mybox">
+            <p class="subtitle is-5">Transfer</p>
+            <input
+              class="input"
+              v-model="toAddress"
+              type="text"
+              style="width:300px"
+              placeholder="who you want to transfer to?"
+            />
+            <input
+              class="input"
+              v-model="transferValue"
+              type="number"
+              style="width:300px"
+              placeholder="how much TPT?"
+            />
+          </div>
+          <button @click="transferTo" class="button">Transfer</button>
+
+          <!-- All Address of Nodes -->
+          <div class="mybox">
+            <p class="title is-5 has-text-centered">All address of nodes</p>
+            <ul>
+              <li v-for="node in nodes" :key="node">{{ node }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- decimal.js -->
+    <script src="https://cdn.jsdelivr.net/npm/decimal.js-light@2.5.0/decimal.min.js"></script>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Web3.js -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

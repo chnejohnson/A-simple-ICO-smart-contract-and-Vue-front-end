@@ -1,0 +1,17 @@
+.owner {
+  margin-top: 30px;
+}
+
+ul .mylist {
+  list-style-type: none;
+}
+
+.mybox {
+  margin: 10px 0;
+  padding: 10px 0;
+  box-sizing: inherit;
+}
+
+#app {
+  padding: 20px 30px;
+}
