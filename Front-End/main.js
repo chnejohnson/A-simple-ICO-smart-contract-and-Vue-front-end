@@ -327,15 +327,15 @@ const tokenAbi = [
 //initialize contract
 const myICO = new web3.eth.Contract(abi, address);
 
-console.log(web3);
-
 const vm = new Vue({
   el: "#app",
   data: {
+    ICOaddress: address,
+    //ERC20 address
     address: "not found",
     symbel: null,
     name: null,
-    //ERC20
+    //ERC20 contract object
     tokenContract: null,
     //the second address created by Ganache
     userAccount: "0x7b959175f9bd9c79d25192Ce573FfDa49c91aE09",
@@ -351,7 +351,15 @@ const vm = new Vue({
     transferValue: null,
     toAddress: null,
     //Events
-    events: null
+    events: [],
+    approvalEvents: [],
+    //Allowance
+    userAllowance: "no address",
+    owner: null,
+    spender: null,
+    //Approve
+    approveToAddress: null,
+    approveValue: null
   },
   computed: {
     stage() {
@@ -373,7 +381,7 @@ const vm = new Vue({
 
     this.nodes = await web3.eth.getAccounts();
     this.getTransfer();
-    console.log(typeof this.ownerAddress);
+    this.getPastEvents();
   },
   methods: {
     startICO() {
@@ -456,13 +464,23 @@ const vm = new Vue({
     },
     //Get events
     async getPastEvents() {
+      //Transfer Events
       try {
         let res = await this.tokenContract.getPastEvents("Transfer", {
           fromBlock: 0,
           toBlack: "latest"
         });
-        console.log(typeof res[0].returnValues.to);
         this.events = res;
+      } catch (err) {
+        console.log("getPastEvents", err);
+      }
+      //Approval Events
+      try {
+        let res = await this.tokenContract.getPastEvents("Approval", {
+          fromBlock: 0,
+          toBlack: "latest"
+        });
+        this.approvalEvents = res;
       } catch (err) {
         console.log("getPastEvents", err);
       }
@@ -476,6 +494,30 @@ const vm = new Vue({
           console.log("hi", data);
         })
         .on("error", console.error);
+    },
+    async allowance() {
+      try {
+        this.userAllowance = await this.tokenContract.methods
+          .allowance(this.owner, this.spender)
+          .call();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    approve() {
+      let value = (this.approveValue * 10 ** 18).toString();
+
+      this.tokenContract.methods
+        .approve(this.approveToAddress, value)
+        .send({
+          from: this.userAccount
+        })
+        .on("receipt", res => {
+          console.log(res);
+        })
+        .on("error", err => {
+          console.log(err);
+        });
     }
   }
 });

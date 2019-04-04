@@ -20,6 +20,8 @@
         <div class="column">
           <!-- Info -->
           <div>
+            <p class="title is-5">ICO Contract Address:</p>
+            <p class="subtitle is-6">{{ ICOaddress }}</p>
             <p class="title is-5">Token Contract Address:</p>
             <p class="subtitle is-6">{{ address }}</p>
             <p class="title is-5">Name:</p>
@@ -46,16 +48,20 @@
                 Get Current Fund
               </button>
             </div>
-            <!-- Past Event -->
+            <!-- Past Transfer Event -->
             <div class="mybox">
               <p class="title is-4">
-                Past Events
+                Past Transfer Events
                 <button @click="getPastEvents" class="button">
-                  Get
+                  Update
                 </button>
               </p>
               <div id="events">
-                <div class="card" v-for="(event,key) in events" :key="key">
+                <div
+                  class="card"
+                  v-for="(event,key) in events.slice().reverse()"
+                  :key="key"
+                >
                   <div class="card-content">
                     <p>Block Number {{ event.blockNumber }}</p>
                     <span class="title is-6">Event:</span>
@@ -74,9 +80,12 @@
                     </p>
                     <p>
                       <span class="title is-6">Value:</span>
-                      <span class="subtitle is-6">{{
-                        event.returnValues.value
-                      }}</span>
+                      <span class="subtitle is-6"
+                        >{{
+                        event.returnValues.value / 10**18
+                        }}
+                        TPT</span
+                      >
                     </p>
                   </div>
                 </div>
@@ -91,8 +100,9 @@
           <p class="subtitle is-5">
             Token balance: {{ userBalance }} {{ symbel }}
           </p>
+
           <div class="mybox">
-            <p class="subtitle is-5">Address (msg.sender)</p>
+            <p>Address (msg.sender)</p>
             <input
               class="input"
               v-model="userAccount"
@@ -103,7 +113,8 @@
 
           <!-- Fallback -->
           <div class="mybox">
-            <p class="subtitle is-5">Value</p>
+            <p class="title is-5">fallback</p>
+            <p>Value</p>
             <input
               class="input"
               v-model="value"
@@ -118,12 +129,14 @@
           <!-- Transfer -->
           <div class="mybox">
             <p class="subtitle is-5">Transfer</p>
+            <p>To</p>
             <input
               class="input"
               v-model="toAddress"
               type="text"
               placeholder="who you want to transfer to?"
             />
+            <p>Value</p>
             <input
               class="input"
               v-model="transferValue"
@@ -144,9 +157,75 @@
           </div>
         </div>
 
-        <!-- User Interface -->
+        <!-- Subscribe Event -->
         <div class="column">
+          <p class="title is-3">Event</p>
           <button @click="getTransfer" class="button">Get Transfer</button>
+
+          <!-- Allowance -->
+          <div class="mybox">
+            <p class="title is-5">Allowance</p>
+            <span>Owner address</span
+            ><input type="text" class="input" v-model="owner" />
+            <span>Spender</span>
+            <input type="text" class="input" v-model="spender" />
+            <button class="button" @click="allowance">Check Allowance</button>
+            <p>Allowance: {{ userAllowance/10**18 }} TPT</p>
+          </div>
+
+          <!-- Aprove -->
+          <div class="mybox">
+            <p class="title is-5">Approve</p>
+            <span>Spender address</span
+            ><input type="text" class="input" v-model="approveToAddress" />
+            <span>Value</span>
+            <input type="text" class="input" v-model="approveValue" />
+            <button class="button" @click="approve">Approve</button>
+          </div>
+
+          <!-- Get Approval Events -->
+          <div class="mybox">
+            <p class="title is-4">
+              Past Approval Events
+              <button @click="getPastEvents" class="button">
+                Update
+              </button>
+            </p>
+            <div id="events">
+              <div
+                class="card"
+                v-for="(event,key) in approvalEvents.slice().reverse()"
+                :key="key"
+              >
+                <div class="card-content">
+                  <p>Block Number {{ event.blockNumber }}</p>
+                  <span class="title is-6">Event:</span>
+                  <span class="subtitle is-6">{{ event.event }}</span>
+                  <p>
+                    <span class="title is-6">Owner:</span>
+                    <span class="subtitle is-6">{{
+                      event.returnValues.owner
+                    }}</span>
+                  </p>
+                  <p>
+                    <span class="title is-6">Spender:</span>
+                    <span class="subtitle is-6">{{
+                      event.returnValues.spender
+                    }}</span>
+                  </p>
+                  <p>
+                    <span class="title is-6">Value:</span>
+                    <span class="subtitle is-6"
+                      >{{
+                        event.returnValues.value / 10**18
+                      }}
+                      TPT</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
