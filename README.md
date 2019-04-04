@@ -1,4 +1,4 @@
-## ICO ecosystem
+## ICO front-end Interface
 
 ### Introduction
 
