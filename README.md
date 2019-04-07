@@ -21,7 +21,7 @@ Then I would tell you how to run virtual nodes on your computer so that you can 
 
 if you succeed, you would see the folder named "build" in the project, and then you can run...
 
-`truffle migrate` or `truffle migrate --reset` (if you have had build folder)
+`truffle migrate` or `truffle migrate --reset` (if you have had folder named 'build')
 
 This code would migrate the contract to the Ganache nodes server, deploying the contract on the blockchain.
 
