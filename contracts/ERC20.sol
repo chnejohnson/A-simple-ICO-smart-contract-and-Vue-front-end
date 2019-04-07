@@ -17,7 +17,7 @@ contract ERC20 is IERC20 {
   mapping(address => uint) _balances;
   mapping(address => mapping(address => uint)) _approve;
 
-  //Constructor 讓ICO合約來創建這份合約
+  //Constructor for myICO to construct this contract
   constructor(
     string memory pName,
     uint8 pDecimals,
@@ -28,6 +28,9 @@ contract ERC20 is IERC20 {
     decimals = pDecimals;
     symbel = pSymbel;
     _totalSupply = pTotalSupply;
+    //when constructing, this contract would transfer totalSupply set by
+    //myICO to myICO contract. 
+    //Therefore, myICO contract have all of the token at first.
     _balances[msg.sender] = _balances[msg.sender].add(_totalSupply);
     emit Transfer(address(this), msg.sender, _totalSupply);
   }
@@ -53,14 +56,18 @@ contract ERC20 is IERC20 {
   }
 
   function approve(address spender, uint256 value) external returns (bool){
-    //我作為使用者(msg.sender)，我授權給spender零用錢，以下是這項授權金流的紀錄
+    //the user(msg.sender) approve spender who can spend how much token(value)
     _approve[msg.sender][spender] = value;
     emit Approval(msg.sender, spender, value);
     return true;
   }
 
   function transferFrom(address from, address to, uint256 value) external returns (bool){
-    //from帳戶之前授權給我多少零用錢，現在因為要轉移給to，所以授權金流減少
+    //the user(msg.sender) is spender, so how do you use your allowance?
+    //you can use transferFrom to transfer allowance from owner to yourself,
+    //therefore the to address is yourself.
+    //Or you can transfer allowance from owner to another, 
+    //so that the to address is another address.
     _approve[from][msg.sender] = _approve[from][msg.sender].sub(value);
     
     _balances[from] = _balances[from].sub(value);

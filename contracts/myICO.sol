@@ -1,6 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "./SafeMath.sol";
+//Use this contract to construct ERC20 constract
 import "./ERC20.sol";
 
 contract myICO {
@@ -66,15 +67,13 @@ contract myICO {
       return icoState;
   }
 
-  //ICO的核心
+  //core of ICO
   function() external payable whenICOStart {
     require(msg.value > 0);
     require(caps.sub(currentFund) >= msg.value);
-    //紀錄目前ICO累積到的金額
+    //To accumulate current value of taken
     currentFund = currentFund.add(msg.value); 
-    //使用IERC20這個介面來發動ERC20的實作函式，將fallback收到的錢，轉給user
+    //Using interface IERC20 to call the function in the ERC20
     IERC20(tokenAddress).transfer(msg.sender, msg.value);
   }
-
-
 }

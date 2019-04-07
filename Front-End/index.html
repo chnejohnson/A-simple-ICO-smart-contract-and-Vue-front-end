@@ -102,7 +102,7 @@
           </p>
 
           <div class="mybox">
-            <p>Address (msg.sender)</p>
+            <p>Address (userAccount)</p>
             <input
               class="input"
               v-model="userAccount"
@@ -113,7 +113,7 @@
 
           <!-- Fallback -->
           <div class="mybox">
-            <p class="title is-5">fallback</p>
+            <p class="title is-5">Fallback (set userAccount)</p>
             <p>Value</p>
             <input
               class="input"
@@ -128,7 +128,7 @@
 
           <!-- Transfer -->
           <div class="mybox">
-            <p class="subtitle is-5">Transfer</p>
+            <p class="title is-5">Transfer (set userAccount)</p>
             <p>To</p>
             <input
               class="input"
@@ -157,11 +157,8 @@
           </div>
         </div>
 
-        <!-- Subscribe Event -->
+        <!-- Approve -->
         <div class="column">
-          <p class="title is-3">Event</p>
-          <button @click="getTransfer" class="button">Get Transfer</button>
-
           <!-- Allowance -->
           <div class="mybox">
             <p class="title is-5">Allowance</p>
@@ -175,12 +172,24 @@
 
           <!-- Aprove -->
           <div class="mybox">
-            <p class="title is-5">Approve</p>
+            <p class="title is-5">Approve (set userAccount)</p>
             <span>Spender address</span
             ><input type="text" class="input" v-model="approveToAddress" />
             <span>Value</span>
             <input type="text" class="input" v-model="approveValue" />
             <button class="button" @click="approve">Approve</button>
+          </div>
+
+          <!-- TransferFrom -->
+          <div class="mybox">
+            <p class="title is-5">TransferFrom (set userAccount)</p>
+            <span>from address</span>
+            <input type="text" class="input" v-model="transferFromAddress" />
+            <span>to address</span>
+            <input type="text" class="input" v-model="transferToAddress" />
+            <span>value</span>
+            <input type="text" class="input" v-model="transferFromValue" />
+            <button class="button" @click="transferFrom">Transfer From</button>
           </div>
 
           <!-- Get Approval Events -->

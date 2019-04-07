@@ -359,7 +359,11 @@ const vm = new Vue({
     spender: null,
     //Approve
     approveToAddress: null,
-    approveValue: null
+    approveValue: null,
+    //TransferFrom
+    transferFromAddress: null,
+    transferToAddress: null,
+    transferFromValue: null
   },
   computed: {
     stage() {
@@ -380,7 +384,6 @@ const vm = new Vue({
     this.getStage();
 
     this.nodes = await web3.eth.getAccounts();
-    this.getTransfer();
     this.getPastEvents();
   },
   methods: {
@@ -459,8 +462,6 @@ const vm = new Vue({
         .on("error", err => {
           console.log(err);
         });
-
-      this.getTransfer();
     },
     //Get events
     async getPastEvents() {
@@ -485,16 +486,7 @@ const vm = new Vue({
         console.log("getPastEvents", err);
       }
     },
-    //Subscribe (can't work)
-    getTransfer() {
-      this.tokenContract.events
-        .Transfer()
-        .on("data", event => {
-          let data = event.returnValue;
-          console.log("hi", data);
-        })
-        .on("error", console.error);
-    },
+
     async allowance() {
       try {
         this.userAllowance = await this.tokenContract.methods
@@ -509,6 +501,21 @@ const vm = new Vue({
 
       this.tokenContract.methods
         .approve(this.approveToAddress, value)
+        .send({
+          from: this.userAccount
+        })
+        .on("receipt", res => {
+          console.log(res);
+        })
+        .on("error", err => {
+          console.log(err);
+        });
+    },
+    transferFrom() {
+      let value = (this.transferFromValue * 10 ** 18).toString();
+
+      this.tokenContract.methods
+        .transferFrom(this.transferFromAddress, this.transferToAddress, value)
         .send({
           from: this.userAccount
         })
