@@ -363,7 +363,9 @@ const vm = new Vue({
     //TransferFrom
     transferFromAddress: null,
     transferToAddress: null,
-    transferFromValue: null
+    transferFromValue: null,
+    //Total supply
+    totalSupply: null
   },
   computed: {
     stage() {
@@ -385,6 +387,9 @@ const vm = new Vue({
 
     this.nodes = await web3.eth.getAccounts();
     this.getPastEvents();
+
+    //get total supply
+    this.totalSupply = await this.tokenContract.methods.totalSupply().call();
   },
   methods: {
     startICO() {
