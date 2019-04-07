@@ -15,7 +15,7 @@ To run this demo, you should download and install...
 2. [Ganache CLI](https://truffleframework.com/ganache)
 3. run `npm install -g truffle` on your terminal to install Truffle globally.
 
-Then I would tell you how to run virtual nodes on your computer so that you can operate the demo on the front-end. First of all, open up Ganachi so that you have 10 virtual nodes on your machine, and then you should compile the contracts and migrate  to the Ganache server by Truffle. Open up terminal in the project and run
+Let's start to run virtual nodes on your computer so that you can operate the demo on the front-end. First of all, opening up Ganache you would have some virtual nodes on your machine (you should set the port number as 8545 instead of 7545 by default or change port number on truffle-config.js), and then you can compile the contracts and migrate to the Ganache server by Truffle. Open up terminal in the project and run
 
 `truffle compile` , 
 
@@ -25,5 +25,5 @@ if you succeed, you would see the folder named "build" in the project, and then 
 
 This code would migrate the contract to the Ganache nodes server, deploying the contract on the blockchain.
 
-Finally, the first address of Ganache would be the owner of myICO contract. Now in the Front-End folder, you can open up index.html on the browser, and use address on the Ganache to buy the token, transfer to others, or explore what function approve (or transferFrom) do. Have a fun!
+Finally, the first address of Ganache would be the owner of myICO contract. Now in the Front-End folder, you can open up index.html on the browser, and use address from Ganache or on the browser below 'All address of nodes' to buy some token with ether, transfer to others, or explore what function Approve (or TransferFrom) actually do. Have a fun!
 
