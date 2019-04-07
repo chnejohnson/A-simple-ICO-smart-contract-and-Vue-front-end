@@ -27,3 +27,9 @@ This code would migrate the contract to the Ganache nodes server, deploying the 
 
 Finally, the first address of Ganache would be the owner of myICO contract. Now in the Front-End folder, you can open up index.html on the browser, and use address from Ganache or on the browser below 'All address of nodes' to buy some token with ether, transfer to others, or explore what function Approve (or TransferFrom) actually do. Have a fun!
 
+### Bonus
+To learn basic of Solidity, check out these awesome online tutorial below.
+
+1. [CryptoZombies](https://cryptozombies.io/en/course) in English.
+2. [Solidity 30 Days ](https://www.youtube.com/watch?v=z2FEikbDqoA&list=PLHmOMPRfmOxSJcrlwyandWYiuP9ZAMYoF) in 中文. (This repo's contracts comes from this course)
+
