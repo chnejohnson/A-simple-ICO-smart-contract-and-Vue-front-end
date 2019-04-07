@@ -19,4 +19,11 @@ Then I would tell you how to run virtual nodes on your computer so that you can 
 
 `truffle compile` , 
 
-if you succeed, you would see the folder named "build" in the project.
+if you succeed, you would see the folder named "build" in the project, and then you can run...
+
+`truffle migrate` or `truffle migrate --reset` (if you have had build folder)
+
+This code would migrate the contract to the Ganache nodes server, deploying the contract on the blockchain.
+
+Finally, the first address of Ganache would be the owner of myICO contract. Now in the Front-End folder, you can open up index.html on the browser, and use address on the Ganache to buy the token, transfer to others, or explore what function approve (or transferFrom) do. Have a fun!
+
