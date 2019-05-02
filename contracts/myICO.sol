@@ -59,7 +59,9 @@ contract myICO {
 
   function endICO() public onlyOwner whenICOStart {
     icoState = ICOState.END;
+    //To transfer this contract's ether balance to owner's address
     owner.transfer(address(this).balance);
+    //To transfer surplus token from ERC20 to owner's address
     IERC20(tokenAddress).transfer(owner, caps.sub(currentFund));
   } 
 
