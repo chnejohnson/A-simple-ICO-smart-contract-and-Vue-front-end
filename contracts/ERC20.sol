@@ -29,7 +29,7 @@ contract ERC20 is IERC20 {
     symbel = pSymbel;
     _totalSupply = pTotalSupply;
     //when constructing, this contract would transfer totalSupply set by
-    //myICO to myICO contract. 
+    //myICO to myICO contract.
     //Therefore, myICO contract have all of the token at first.
     _balances[msg.sender] = _balances[msg.sender].add(_totalSupply);
     emit Transfer(address(this), msg.sender, _totalSupply);
@@ -66,10 +66,10 @@ contract ERC20 is IERC20 {
     //the user(msg.sender) is spender, so how do you use your allowance?
     //you can use transferFrom to transfer allowance from owner to yourself,
     //therefore the to address is yourself.
-    //Or you can transfer allowance from owner to another, 
+    //Or you can transfer allowance from owner to another,
     //so that the to address is another address.
     _approve[from][msg.sender] = _approve[from][msg.sender].sub(value);
-    
+
     _balances[from] = _balances[from].sub(value);
     _balances[to] = _balances[to].add(value);
 
